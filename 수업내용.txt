@@ -1,0 +1,488 @@
+1. 강사소개 및 github 
+
+ 강사명: 인경열
+ github: https://github.com/inky4832/ktds_reactjs
+ google 드라이브: https://drive.google.com/drive/folders/1zuouxzUHcQaFtcnpqte5igkzWtcEw4pX?usp=sharing
+
+
+2. 환경설정
+
+ 1) node.js 설치
+	http://nodejs.org
+
+ 2) vsc 설치
+	https://code.visualstudio.com
+
+ 3) vsc 확장팩 설치
+	live server  ( ES6 리뷰시 필요 )
+	Reactjs code snippets  v2.4.0  ( 클래스기반 전용)
+	ReactJS Snippets  v2.0.1       ( 함수기반 전용 )
+
+ 4) 크롬 브라우저에 React 플러그인 설치
+       React Developer Tools 
+
+
+3. ES6 개요
+
+  1) let, const
+  2) 연산자1 - 전개연산자
+     연산자2 - 논리연산자
+  3) 함수선언식,함수표현식,arrow함수
+     리터값 있는 함수
+     default 파라미터
+     packing 파라미터
+     파라미터_객체분해할당(destructuring)
+  4) template 리터럴
+  5) JSON 객체
+  6) 클래스 기본, 상속, 동적 static 
+  7) 모듈
+
+
+3. 리액트 개요
+
+ - https://ko.reactjs.org/
+ - 페이스북에서 만든 UI 라이브러리
+
+
+4. my-app 프로젝트 생성 ( React toolchain 이용 )
+
+  https://ko.reactjs.org/docs/create-a-new-react-app.html#create-react-app
+
+  1) my-app 프로젝트 생성
+    npx create-react-app  my-app
+    cd my-app
+    npm start --open
+
+  2) my-app 프로젝트 구조 설명
+    
+     index.html : 메인 홈페이지 파일
+     
+     index.js   : 시작점. App 컴포넌트를 로딩하여 웹 브라우저에서 실행시킴.
+     App.js	: React 컴포넌트 파일.
+
+     package.json: nodejs의 모듈 관리 설정 파일로서 
+                   프로젝트에서 사용하는 third party용 패키지를 나열
+
+
+
+5. 컴포넌트 개요
+
+  1) 개념
+  웹 화면에서 보여지는 개별적인 화면 블록을 의미하고 일반적으로 중첩된 형태로 사용된다. ( 부모/자식 관계 )
+
+  2) 컴포넌트 생성 방법
+   https://ko.reactjs.org/docs/react-component.html#overview
+
+   가. 클래스형 컴포넌트
+      a. extends  React.Component
+      b. render() 메서드 구현
+      c. return (    html 형식의 JSX코드   );
+      d. export default 컴포넌트명;
+
+   나. 함수형 컴포넌트 ( 대세는 함수형 )
+      a. 함수 선언식 및 표현식
+      b. return (    html 형식의 JSX코드   );
+      c. export default 컴포넌트명;
+
+
+
+  3) 클래스형 컴포넌트 구성요소
+  https://ko.reactjs.org/docs/react-component.html
+
+     - 라이프사이클 메서드 ( render, componentDidMount, getDerivedStateFromProps, shouldComponentUpdate, componentDidUpdate )
+     - 기타 메서드 ( setState 등 )
+     - 클래스 프러퍼티 ( defaultProps )
+     - 인스턴스 프러퍼티 ( props, state )
+
+      ==> 함수형 컴포넌트는 기본적으로 props 만 사용 가능하다. 
+          나머저 기능은 훅(hook)으로 구현된다.
+    
+
+6. 컴포넌트 반환값
+  
+   1) 일반 JSX
+   2) 일반 데이터 (문자열, 수치)
+   3) 배열
+   4) 멀티 JSX 반환시 반드시 root 태그 필요
+      - <React.Fragment> </React.Fragment>
+      - <></>
+
+   5) null, true, false
+      - 랜더링 안됨.
+      - 조건부 랜더링시 유용하게 사용됨.
+   
+   6) ReactDOM.createPortal
+     ==> id="app" 가 아닌 임의의 DOM영역에 랜더링하는 방식이다.
+
+
+ 
+ 7. JSX
+
+  1)개념
+   -JSX(JavaScript XML)로서 UI 구현시 사용된다.
+   -JSX는 babel에 의해서 리액트 컴파일링 되면서 최적화되기 때문에 빠르다.
+   -바벨이 JSX를 리액트요소(리액트객체)로 변환해준다. (예>  React.createElement('a',속성) )
+  
+  예>
+       const element = (<a key="key1" href="http://google.com">click here</a>)
+       console.log(element)
+
+   
+	App.js:4 
+	Object
+	  $$typeof: Symbol(react.element)
+   	  key: "key1"
+	  props: {href: 'http://google.com', children: 'click here'}
+	  ref: null
+	  type: "a"   // type이 문자열이어야 실제 DOM으로 생성될 수 있다. 문자열이 아이면 가상 DOM이다.
+	   _owner: null
+	  _store:
+	   validated: false
+	   [[Prototype]]: Object
+	  _self: undefined
+	  _source:
+	    columnNumber: 18
+	    fileName: "C:\\ktds_react_new\\my-app\\src\\App.js"
+	    lineNumber: 3
+	    [[Prototype]]: Object
+	 [[Prototype]]: Object
+
+
+
+  2) 특징
+
+    가. JSX에서 모든 태그는 종료태그가 필수이다.
+    나. JSX에서는 반드시 단 하나의 root태그가 필수이다.
+    다. JSX에서 JS의 변수값을 출력하고자 할 때는 {}사용한다
+        {}안에서 산술연산,비교연산,3항연산, 조건부랜더링의 && 모두 사용 가능
+    라. JSX에서 JS의 코드 사용할 때는 {} 사용한다.
+    마. JSX에서 전개 연산자 사용 가능하다. 예> {...users}
+    바. JSX에서 이벤트 처리시 카멜 표기법 필수이다. 예> <button onClick={handleEvent}>
+    사. JSX에서 css의 class 속성 대신에 className 속성을 사용해야 된다. ( class는 클래스의 키워드이기 때문)
+    아. JSX에서 style은 객체 형식으로 사용하고 키값은 카멜 표기법을 따른다.
+    자. JSX에서 주석문은 {/*   */} 이다
+
+
+8. 리액트에서 사용 가능한 데이터 값 종류
+
+  1) 속성값(props)
+
+   https://ko.reactjs.org/docs/components-and-props.html
+
+  - 컴포넌트에서 사용할 데이터중에서 변경되지 않는 데이터처리시 사용한다. ( immutable 한 읽기 전용 )
+  - 일반적으로 중첩 레이아웃에서 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때 사용한다. ( 단방향 )
+  - 문자열 이외의 값을 전달하기 위해서는 반드시 {값} 형식을 사용한다.
+  - 부모의 body 이용하여 자식에게 데이터 전달 가능. 이때 자식에서는 props.children 으로 참조 가능하다.
+
+  2) 상태값(state)
+   - 컴포넌트에서 사용할 데이터중에서 변경되는 데이터처리시 사용한다. ( mutable 한 읽기/쓰기 전용 )
+   - 리액트가 자동으로 UI를 변경하려면 상태값으로 만들어줘야 된다.
+
+9. 속성값 타입 지정
+  https://ko.reactjs.org/docs/typechecking-with-proptypes.html#proptypes
+
+  - import PropTypes from 'prop-types';
+  - 속성값의 타입을 지정함으로써 전달되는 데이터 타입 가독성이 높아진다.
+  - 추가로 제약조건 지정도 가능하다.
+  - required (필수요건) 지정도 가능하다.
+
+
+10. default 속성값 지정
+  
+   https://ko.reactjs.org/docs/typechecking-with-proptypes.html#default-prop-values
+
+##################################################################################
+
+11. 이벤트 처리
+
+  https://ko.reactjs.org/docs/handling-events.html
+
+ - 리액트의 이벤트처리는 반드시 카멜표기법을 사용해야 된다.
+ - 문자열이 아닌 함수로 이벤트 핸들러를 전달한다.
+ - 기본동작 방지는 return false는 안되고  preventDefault() 함수를 사용해야 된다.
+ - 자식에게 props를 통하여 이벤트객체를 전달해서 자식에서 부모의 이벤트핸들러를 호출하게 할 수도 있다.
+
+
+ 12. 상태값(state)
+
+   1) 클래스형 컴포넌트
+    https://ko.reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class
+
+   2) 함수형 컴포넌트
+    https://ko.reactjs.org/docs/hooks-state.html
+  
+    - 컴포넌트에서 사용할 데이터중에서 변경되는 데이터처리시 사용한다. ( mutable 한 읽기/쓰기 전용 )
+    - 리액트가 데이터 변경시 자동으로 UI를 변경하려면 상태값(state)으로 만들어줘야 되고
+      데이터가 객체인 경우는 반드시 불변객체로 관리한다.( 값을 덮어쓰는 방식 ) ==> 디스트럭쳐링 방식으로 불변객체를 만든다.
+    - 상태값 변경함수는 비동기이면서 배치로 처리된다.
+      만약 동기로 처리하면 상태값이 변경될때마다 화면을 다시 그리기 때문에 성능이슈가 발생될 수 있다.
+       ==> 만약 매번 동작시킬려면 함수로 처리해야 된다.
+     - 여러개 지정 가능하고 상태값 변경함수는 호출한 순서대로 적용된다.
+   https://reactjs.org/docs/hooks-state.html#tip-using-multiple-state-variables
+     - 만약 하나의 state에 여러 조건을 관리한다면 useReducer가 더 적합하다.	
+
+     가. import
+ 	import React, {useState}  from ‘react’
+     나. 초기화는 함수안에서 
+    	const [변수, 변경함수] =  useState(변수초기값) 
+     다. 랜더링은 {변수} 형식을 사용
+     라. 값 수정은 변경함수(변경값) 형식을 사용
+
+
+13. 부수효과 기능 ( 예> 서버API호출, 이벤트핸들러 등록/해제등 )
+   https://ko.reactjs.org/docs/hooks-effect.html
+
+   - 문법: 
+      useEffect(부수효과함수, [의존성배열]);
+
+   - 특별한 경우가 아니라면 모든 부수효과는 useEffect 에서 처리 권장.
+     컴포넌트 랜더링중에 부수효과를 발생시키는 것은 프로그램의 복잡도를 크게 증가시키게 된다. ( 단위테스트 어려움 및 순수함수가 가지는 여러 장점을 포기하게 됨 )
+   - useEffect 동작은 컴포넌트가 랜더링 된 후에 호출된다. 정확하게 말하면 랜더링 결과가 DOM에 반영되고 비동기로 호출된다.
+
+    - [의존성배열] 이용한 제약조건 추가
+      지정된 배열값이 변경될때만 부수효과 함수가 호출된다.
+      [] 지정하면 부수효과 함수는 단 한번만 호출된다.
+
+       의존성 배열에 설정하는 값 종류? ==> 많은 경우에 의존성 배열을 잘못 지정해서 에러가 발생된다.
+        => 컴포넌트의 상태값, 속성값 또는 내부에서 정의된 지역변수 및 지역함수
+	=> 지역함수인 경우에는 useCallback 적용한다.
+
+     - 부수효과함수가 반환하는 값인 리턴 함수는 다음 부수효과함수가 호출되기 직전 및 컴포넌트가 사라지기 직전(unmount)에 호출된다.
+       따라서 부수효과 반환함수는 컴포넌트가 사라지기 직전에 한번은 호출된다는 것이 보장된다.
+       그래서 다음과 같이 [] 지정하면 한번 초기화하고 마지막에 clean up 하는 코드 구현이 가능해진다.
+
+	예>
+	 useEffect(()=>{
+	     window.addEventListener("resize", onResize);
+	     return ()=>{
+		window.removeEventListener("resize", onResize);
+	    }
+	  }, [] );
+
+
+
+14. Context API 
+ 
+  
+
+   - 깊이가 깊은 계층적인 구조에서는 부모에서 자식으로 반복적으로 속성값(Props)을 이용하여 데이터를 전달해야 한다. ( 복잡하고 비효율적임 )
+   - 값을 전달받을 수 있는 컴포넌트의 수에 제한은 없고 Provider 하위에 또 다른 Provider를 배치하는 것도 가능하며, 이 경우 하위 Provider의 값이 우선이다.
+   - Provider 하위에서 context를 구독하는 모든 컴포넌트는 Provider의 value prop가 바뀔 때마다 다시 렌더링된다.
+
+   1) 부모 작업
+    https://ko.reactjs.org/docs/context.html
+    import React, {createContext, useContext, useState} from 'react';
+
+    const UserContext = createContext('기본값');
+    //상태값으로 관리
+     const [name, setName] = useState('John')
+
+  return (
+    <div>
+      <UserContext.Provider value={name}>
+      <div>상단 메뉴</div>
+        <Profile />
+      <div>하단 메뉴</div>
+
+
+   2) 자식 작업 ==> useContext 훅 사용
+     https://ko.reactjs.org/docs/hooks-reference.html#usecontext
+     
+     function Greeting() {
+	 const username = useContext(UserContext);
+	return<p>{`${username}님 안녕하세요`}</p>
+     }
+
+
+15. React.memo 
+
+ - 리액트는 컴포넌트를 랜더링 한 뒤에 이전 랜더링된 결과와 비교하여 DOM 업데이트를 결정한다.
+   만약 이전 랜더링된 화면과 동일하다면 다시 랜더링 할 필요가 없다.
+ - React.memo( 함수형컴포넌트) 를 사용하면 함수형컴포넌트의 랜더링값이 이전과 동일하다면 다시 랜더링되지 않는다.
+
+  예>
+     // 똑같은 props를 전달 받았다면 이전 화면과 동일하기 때문에 불필요한 컴포넌트 랜더링을 방지할 수 있다. 가장 최근에 랜더링된 결과를 재사용한다.
+	const MyComponent = React.memo((props) => {
+		return (/*컴포넌트 렌더링 코드*/)}
+	);
+ 
+################################################################################################
+16. ref 요소
+
+   https://ko.reactjs.org/docs/hooks-reference.html#useref
+
+  - 실제 DOM에 접근해야 할 때가 존재한다. ( 예> 포커스 지정, DOM요소 크기나 스크롤 위치를 알고 싶은 경우등 )
+  
+  - 문법:
+         const v = useRef(초기값);
+	 <input ref={v} />
+	 <Child ref={v} />
+	 <Child ref={x=>x} />
+
+	 v.current 로 참조한다.
+
+  - 저장 가능한 값은 실제 DOM(input등) 또는 자식 컴포넌트(<Child/>) 및 임의의 데이터(정수값, 함수등)이다.
+  - ref 사용시 주의할 점은 조건부 랜더링인 경우에는 ref에 current 참조 못할 수도 있다.
+    따라서 조건부 랜더링인 경우에는 current 속성 접근이 가능한지 검증하는 코드가 필요하다.
+   
+    예>
+      {/* 다음 버튼은 위의 버튼이 보이는 경우에만 동작되고 hide된 경우에는 에러가 발생된다. */}
+      <button onClick={() => inputRef.current.focus()}>텍스트로 이동1</button>
+      {/* 다음 버튼은 hide된 경우에도 에러가 발생되지 않는다. */}
+      <button onClick={() => inputRef.current && inputRef.current.focus()}>텍스트로 이동2</button>
+
+
+17. useReducer
+  
+   https://ko.reactjs.org/docs/hooks-reference.html#usereducer
+
+   - 상태 관리방법
+     가. useState
+     나. useReducer 
+         ==> 여러 조건에 따라서 상태값이 변경되는 경우에 사용된다.
+         ==> 컴포넌트와 상태 업데이트 로직(리듀서함수)을 분리 가능하도록 구현이 가능하다.
+
+   - 아키텍쳐
+  
+     액션 -->  리듀서 -------> 상태값
+
+       <-------뷰(이벤트발생) <-----
+
+     데이터 변경흐름이 단방향으로 진행된다. 따라서 직관적이고 예측 가능하다.
+
+   - 구성요소
+    1) import
+       import React, { useReducer } from 'react'; 
+
+    2) 액션(action)
+       ==> 액션의 형태는 다음과 같은 객체형식이고 dispatch함수를 사용하여 전달한다.
+       {
+           type:'INCREMENT'
+       }
+       {
+           type:'CHANGE_INPUT',
+           key:'email',
+           value:'zzzz@daum.net'
+       }
+       {
+           type:'ADD_TODO',
+           todo:{
+               id:1
+               pw:2
+           }
+       }
+
+    3) 리듀서 
+      ==> 현재 상태값인 state와 action 인자를 받아서 새로운 state값을 반환하는 함수이다.
+
+      const reducer = (state, action) => {
+        switch(action.type){
+	   case "INCREMENT': return state+1;
+	   case "DECREMENT": return state-1;
+	   default: return state;
+	}
+       }
+
+    4) 초기화 (상태값과 리듀서 설정)
+       const [state, dispatch] = useReducer(reducer, initialState); \
+
+    5) 뷰에서 이벤트 발생
+        const onIncrease = () => {
+            dispatch({ type: 'INCREMENT' });
+        };
+
+
+
+
+18.  useMemo
+
+    https://ko.reactjs.org/docs/hooks-reference.html#usememo
+
+    - 메모이제이션 기능 제공(이전 값을 재활용 가능)
+    - 계산량이 많은 함수를 재활용하는 용도 가능
+      
+      const value = useMemo(()=>연산함수(v1), [v1]); //  의존성 배열값 v1가 변경되면 useMemo 함수가 수행된다.
+						      만약 변경되지 않았다면 이전값을 재활용하게 된다.
+
+
+19. useCallback
+
+   https://ko.reactjs.org/docs/hooks-reference.html#usecallback
+
+  - 메모이제이션 기능 제공(이전 값을 재활용 가능)
+  - useMemo와 많이 비슷
+    
+
+ 20. axios
+
+    https://ko.reactjs.org/docs/faq-ajax.html
+
+    https://github.com/axios/axios 
+
+    Node의 NPM 이용한 설치:	
+      npm install axios
+
+    CDN 방식 이용한 설치:
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+   가. GET 방식
+
+   import axios from 'axios';
+
+             axios
+              .get("https://reqres.in/api/users/2")
+              .then((response) => {
+                console.log(response.data.data);
+              })
+              .catch((error) => {
+                // handle error
+                console.log(error);
+              })
+              .then(() => {
+                // always executed
+              });
+
+   나. POST 방식
+     import axios from 'axios';
+
+              axios
+              .post("https://reqres.in/api/users", {
+                name: "morpheus",
+                job: "leader",
+              })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                // handle error
+                console.log(error);
+              })
+              .then(() => {
+                // always executed
+              });
+
+
+
+21.  라우팅
+
+   - 웹 어플리케이션의 UI 화면을 구현할 때 사용 가능한 형태는 SPA와 MPA가 있다.
+     SPA와 MPA의 동작 방식의 가장 큰 차이점은 일반적인 Form 전송이냐 Ajax 동작이냐로 나눠볼 수 있다. 
+
+   - 라우팅은 SPA 구현하기 위한 기술이다.
+
+    https://reactrouter.com/docs/en/v6
+
+   - 라우팅 설치:
+      npm  install  react-router-dom
+   
+   - 샘플 가이드
+    https://reactrouter.com/docs/en/v6/getting-started/installation#create-react-app
+
+   - 중첩라우팅
+    https://reactrouter.com/docs/en/v6/getting-started/tutorial#nested-routes
+
+   - 파라미터 전달
+    https://reactrouter.com/docs/en/v6/hooks/use-params#useparams
+
+   - 프로그래밍 처리
+    https://reactrouter.com/docs/en/v6/hooks/use-navigate#usenavigate
